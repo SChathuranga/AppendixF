@@ -2,7 +2,7 @@ package genesis.lab.models;
 
 public class VentilationFactor 
 {
-	private double heightOfCompartment, floorArea, ventilationArea, heightOfVentilationOpening, areaOfHorizontalOpening, ventilationFactorValue;
+	private double heightOfCompartment, floorArea, ventilationArea, heightOfVentilationOpening, areaOfHorizontalOpening, ventilationFactorValue=0;
 
 	public double getHeightOfCompartment() {
 		return heightOfCompartment;

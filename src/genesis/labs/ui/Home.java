@@ -1,6 +1,5 @@
 package genesis.labs.ui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -16,18 +15,21 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+@SuppressWarnings("serial")
 public class Home extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtDesignFireLoadDensity;
-	private JTextField txtThermalPropertiesFactor;
-	private JTextField txtVentilationFactor;
-	private JTextField txtDependantMaterialFactor;
+	public JTextField txtDesignFireLoadDensity;
+	public JTextField txtThermalPropertiesFactor;
+	public JTextField txtVentilationFactor;
+	public JTextField txtDependantMaterialFactor;
 	private JTextField txtTime;
-
+	
 	public double ventilationFactorValue;
-	VentilationFactor ventilationFactor;
+	VentilationFactor ventilationFactor = new VentilationFactor();
 	/**
 	 * Launch the application.
 	 */
@@ -56,6 +58,12 @@ public class Home extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 540, 329);
 		contentPane = new JPanel();
+		contentPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				txtVentilationFactor.setText(String.valueOf(ventilationFactor.getVentilationFactorValue()));
+			}
+		});
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -119,7 +127,7 @@ public class Home extends JFrame {
 		JButton btnVentilationFactor = new JButton("Calculate");
 		btnVentilationFactor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentilationFactorCalculatorUI ventilationFactorCalculatorUI = new VentilationFactorCalculatorUI();
+				VentilationFactorCalculatorUI ventilationFactorCalculatorUI = new VentilationFactorCalculatorUI(ventilationFactor);
 				ventilationFactorCalculatorUI.setVisible(true);
 			}
 		});
@@ -156,5 +164,14 @@ public class Home extends JFrame {
 		JLabel lblNewLabel_6 = new JLabel("minutes");
 		lblNewLabel_6.setBounds(422, 255, 55, 16);
 		contentPane.add(lblNewLabel_6);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtVentilationFactor.setText(String.valueOf(ventilationFactor.getVentilationFactorValue()));
+			}
+		});
+		btnNewButton.setBounds(422, 199, 90, 28);
+		contentPane.add(btnNewButton);
 	}
 }
